@@ -22,6 +22,10 @@ const {
   solanaMetadata,
   gif,
 } = require(`${basePath}/src/config.js`);
+const path = require("path");
+
+const canvasGif = require("canvas-gif");
+
 const canvas = createCanvas(format.width, format.height);
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = format.smoothing;
@@ -219,6 +223,27 @@ const drawElement = (_renderObject, _index, _layersLen) => {
   addAttributes(_renderObject);
 };
 
+const drawElement2 = (_renderObject, _index, _layersLen, _ctx) => {
+  _ctx.globalAlpha = _renderObject.layer.opacity;
+  _ctx.globalCompositeOperation = _renderObject.layer.blend;
+  text.only
+    ? addText(
+        `${_renderObject.layer.name}${text.spacer}${_renderObject.layer.selectedElement.name}`,
+        text.xGap,
+        text.yGap * (_index + 1),
+        text.size
+      )
+    : _ctx.drawImage(
+        _renderObject.loadedImage,
+        0,
+        0,
+        format.width,
+        format.height
+      );
+
+  addAttributes(_renderObject);
+};
+
 const constructLayerToDna = (_dna = "", _layers = []) => {
   let mappedDnaToLayers = _layers.map((layer, index) => {
     let selectedElement = layer.elements.find(
@@ -385,16 +410,59 @@ const startCreating = async () => {
           if (background.generate) {
             drawBackground();
           }
-          renderObjectArray.forEach((renderObject, index) => {
-            drawElement(
-              renderObject,
-              index,
-              layerConfigurations[layerConfigIndex].layersOrder.length
-            );
-            if (gif.export) {
-              hashlipsGiffer.add();
-            }
-          });
+          //Aqui agregar fondo GIF
+          // if(configuracion.animatedBackgorund) {
+          //https://blog.logrocket.com/editing-gifs-node-js-project-canvas-gif/#getting-started-canvas-gif
+          // https://themadcreator.github.io/gifler/
+          const callBack = (
+            context,
+            width,
+            height,
+            totalFrames,
+            currentFrame
+          ) => {
+            renderObjectArray.forEach((renderObject, index) => {
+              if (index == 0) return;
+              if (index > 1) return;
+              context.drawImage(
+                renderObject.loadedImage,
+                0,
+                0,
+                format.width,
+                format.height
+              );
+            });
+          };
+          const options = {};
+          // const image = renderObjectArray[0].loadedImage;
+          // const str = image.toString("base64");
+          // const buffer = Buffer.from(str, "base64");
+          canvasGif(
+            renderObjectArray[0].layer.selectedElement.path,
+            callBack,
+            options
+          )
+            .then((buffer) =>
+              fs.writeFileSync(path.resolve(__dirname, "output1.gif"), buffer)
+            )
+            .catch((error) => {
+              console.log(error);
+            });
+
+            
+          // } else {
+          // renderObjectArray.forEach((renderObject, index) => {
+          //   drawElement(
+          //     renderObject,
+          //     index,
+          //     layerConfigurations[layerConfigIndex].layersOrder.length
+          //   );
+          //   if (gif.export) {
+          //     hashlipsGiffer.add();
+          //   }
+          // });
+          // }
+
           if (gif.export) {
             hashlipsGiffer.stop();
           }

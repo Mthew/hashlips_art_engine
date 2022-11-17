@@ -5,12 +5,12 @@ const { NETWORK } = require(`${basePath}/constants/network.js`);
 const network = NETWORK.eth;
 
 // General metadata for Ethereum
-const namePrefix = "Your Collection";
+const namePrefix = "Esqueletrons";
 const description = "Remember to replace this description";
 const baseUri = "ipfs://NewUriToReplace";
 
 const solanaMetadata = {
-  symbol: "YC",
+  symbol: "LC",
   seller_fee_basis_points: 1000, // Define how much % you want from secondary market sales 1000 = 10%
   external_url: "https://www.youtube.com/c/hashlipsnft",
   creators: [
@@ -23,18 +23,81 @@ const solanaMetadata = {
 
 // If you have selected Solana then the collection starts from 0 automatically
 const layerConfigurations = [
-  {
-    growEditionSizeTo: 5,
+  //Gris
+  { 
+    growEditionSizeTo: 2,
     layersOrder: [
-      { name: "Background" },
-      { name: "Eyeball" },
-      { name: "Eye color" },
-      { name: "Iris" },
-      { name: "Shine" },
-      { name: "Bottom lid" },
-      { name: "Top lid" },
+      { name: "BgGIF" },
+      { name: "Skeleton1"},
+      { name: "Pants" },
+      { name: "Shoes" },
+      { name: "TShirt" },
+      { name: "HipAccesories" },
+      { name: "Craneo1" },
+      { name: "Brillo" },
+      { name: "Headtop" },      
     ],
   },
+  //Verde
+  // {
+  //   growEditionSizeTo: 11,
+  //   layersOrder: [
+  //     { name: "BgGIF" },
+  //     { name: "Skeleton2"},
+  //     { name: "Pants" },
+  //     { name: "Shoes" },
+  //     { name: "TShirt" },
+  //     { name: "HipAccesories" },
+  //     { name: "Craneo2" },
+  //     { name: "Brillo" },
+  //     { name: "Headtop" },      
+  //   ],
+  // },
+  // //Azul
+  // {
+  //   growEditionSizeTo: 10,
+  //   layersOrder: [
+  //     { name: "BgGIF" },
+  //     { name: "Skeleton3"},
+  //     { name: "Pants" },
+  //     { name: "Shoes" },
+  //     { name: "TShirt" },
+  //     { name: "HipAccesories" },
+  //     { name: "Craneo3" },
+  //     { name: "Brillo" },
+  //     { name: "Headtop" },      
+  //   ],
+  // },
+  // //Blanco Gris
+  // {
+  //   growEditionSizeTo: 3,
+  //   layersOrder: [
+  //     { name: "BgGIF" },
+  //     { name: "Skeleton4"},
+  //     { name: "Pants" },
+  //     { name: "Shoes" },
+  //     { name: "TShirt" },
+  //     { name: "HipAccesories" },
+  //     { name: "Craneo4" },
+  //     { name: "Brillo" },
+  //     { name: "Headtop" },      
+  //   ],
+  // },
+  // //Dorado
+  // {
+  //   growEditionSizeTo: 1,
+  //   layersOrder: [
+  //     { name: "BgGIF" },
+  //     { name: "Skeleton5"},
+  //     { name: "Pants" },
+  //     { name: "Shoes" },
+  //     { name: "TShirt" },
+  //     { name: "HipAccesories" },
+  //     { name: "Craneo5" },
+  //     { name: "Brillo" },
+  //     { name: "Headtop" },      
+  //   ],
+  // },
 ];
 
 const shuffleLayerConfigurations = false;
@@ -42,8 +105,8 @@ const shuffleLayerConfigurations = false;
 const debugLogs = false;
 
 const format = {
-  width: 512,
-  height: 512,
+  width: 1080,
+  height: 1920,
   smoothing: false,
 };
 
@@ -68,7 +131,7 @@ const text = {
 };
 
 const pixelFormat = {
-  ratio: 2 / 128,
+  ratio: 10 / 256,
 };
 
 const background = {
