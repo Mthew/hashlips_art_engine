@@ -24,8 +24,6 @@ const {
 } = require(`${basePath}/src/config.js`);
 const path = require("path");
 
-const canvasGif = require("canvas-gif");
-
 const canvas = createCanvas(format.width, format.height);
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = format.smoothing;
@@ -359,14 +357,12 @@ function shuffle(array) {
   return array;
 }
 
-const startCreating = async () => {
-  let layerConfigIndex = 0;
-  let editionCount = 1;
-  let failedCount = 0;
+const getArray = () => {
   let abstractedIndexes = [];
+  sum = layerConfigurations.reduce((a, b) => a + b.growEditionSizeTo, 0);
   for (
     let i = network == NETWORK.sol ? 0 : 1;
-    i <= layerConfigurations[layerConfigurations.length - 1].growEditionSizeTo;
+    i <= sum;
     i++
   ) {
     abstractedIndexes.push(i);
@@ -374,6 +370,15 @@ const startCreating = async () => {
   if (shuffleLayerConfigurations) {
     abstractedIndexes = shuffle(abstractedIndexes);
   }
+  return abstractedIndexes;
+};
+
+const startCreating = async () => {
+  let layerConfigIndex = 0;
+  let editionCount = 1;
+  let failedCount = 0;
+  let abstractedIndexes = getArray();
+
   debugLogs
     ? console.log("Editions left to create: ", abstractedIndexes)
     : null;
@@ -381,6 +386,9 @@ const startCreating = async () => {
     const layers = layersSetup(
       layerConfigurations[layerConfigIndex].layersOrder
     );
+    
+    editionCount = 1;
+
     while (
       editionCount <= layerConfigurations[layerConfigIndex].growEditionSizeTo
     ) {
@@ -410,58 +418,17 @@ const startCreating = async () => {
           if (background.generate) {
             drawBackground();
           }
-          //Aqui agregar fondo GIF
-          // if(configuracion.animatedBackgorund) {
-          //https://blog.logrocket.com/editing-gifs-node-js-project-canvas-gif/#getting-started-canvas-gif
-          // https://themadcreator.github.io/gifler/
-          const callBack = (
-            context,
-            width,
-            height,
-            totalFrames,
-            currentFrame
-          ) => {
-            renderObjectArray.forEach((renderObject, index) => {
-              if (index == 0) return;
-              if (index > 1) return;
-              context.drawImage(
-                renderObject.loadedImage,
-                0,
-                0,
-                format.width,
-                format.height
-              );
-            });
-          };
-          const options = {};
-          // const image = renderObjectArray[0].loadedImage;
-          // const str = image.toString("base64");
-          // const buffer = Buffer.from(str, "base64");
-          canvasGif(
-            renderObjectArray[0].layer.selectedElement.path,
-            callBack,
-            options
-          )
-            .then((buffer) =>
-              fs.writeFileSync(path.resolve(__dirname, "output1.gif"), buffer)
-            )
-            .catch((error) => {
-              console.log(error);
-            });
 
-            
-          // } else {
-          // renderObjectArray.forEach((renderObject, index) => {
-          //   drawElement(
-          //     renderObject,
-          //     index,
-          //     layerConfigurations[layerConfigIndex].layersOrder.length
-          //   );
-          //   if (gif.export) {
-          //     hashlipsGiffer.add();
-          //   }
-          // });
-          // }
+          renderObjectArray.forEach((renderObject, index) => {
+            drawElement(
+              renderObject,
+              index,
+              layerConfigurations[layerConfigIndex].layersOrder.length
+            );
+            if (gif.export) {
+              hashlipsGiffer.add();
+            }
+          });
 
           if (gif.export) {
             hashlipsGiffer.stop();

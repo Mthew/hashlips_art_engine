@@ -27,7 +27,7 @@ const layerConfigurations = [
   { 
     growEditionSizeTo: 2,
     layersOrder: [
-      { name: "BgGIF" },
+      // { name: "BgGIF" },
       { name: "Skeleton1"},
       { name: "Pants" },
       { name: "Shoes" },
@@ -38,66 +38,66 @@ const layerConfigurations = [
       { name: "Headtop" },      
     ],
   },
-  //Verde
-  // {
-  //   growEditionSizeTo: 11,
-  //   layersOrder: [
-  //     { name: "BgGIF" },
-  //     { name: "Skeleton2"},
-  //     { name: "Pants" },
-  //     { name: "Shoes" },
-  //     { name: "TShirt" },
-  //     { name: "HipAccesories" },
-  //     { name: "Craneo2" },
-  //     { name: "Brillo" },
-  //     { name: "Headtop" },      
-  //   ],
-  // },
-  // //Azul
-  // {
-  //   growEditionSizeTo: 10,
-  //   layersOrder: [
-  //     { name: "BgGIF" },
-  //     { name: "Skeleton3"},
-  //     { name: "Pants" },
-  //     { name: "Shoes" },
-  //     { name: "TShirt" },
-  //     { name: "HipAccesories" },
-  //     { name: "Craneo3" },
-  //     { name: "Brillo" },
-  //     { name: "Headtop" },      
-  //   ],
-  // },
-  // //Blanco Gris
-  // {
-  //   growEditionSizeTo: 3,
-  //   layersOrder: [
-  //     { name: "BgGIF" },
-  //     { name: "Skeleton4"},
-  //     { name: "Pants" },
-  //     { name: "Shoes" },
-  //     { name: "TShirt" },
-  //     { name: "HipAccesories" },
-  //     { name: "Craneo4" },
-  //     { name: "Brillo" },
-  //     { name: "Headtop" },      
-  //   ],
-  // },
-  // //Dorado
-  // {
-  //   growEditionSizeTo: 1,
-  //   layersOrder: [
-  //     { name: "BgGIF" },
-  //     { name: "Skeleton5"},
-  //     { name: "Pants" },
-  //     { name: "Shoes" },
-  //     { name: "TShirt" },
-  //     { name: "HipAccesories" },
-  //     { name: "Craneo5" },
-  //     { name: "Brillo" },
-  //     { name: "Headtop" },      
-  //   ],
-  // },
+  // Verde
+  {
+    growEditionSizeTo: 11,
+    layersOrder: [
+      // { name: "BgGIF" },
+      { name: "Skeleton2"},
+      { name: "Pants" },
+      { name: "Shoes" },
+      { name: "TShirt" },
+      { name: "HipAccesories" },
+      { name: "Craneo2" },
+      { name: "Brillo" },
+      { name: "Headtop" },      
+    ],
+  },
+  //Azul
+  {
+    growEditionSizeTo: 10,
+    layersOrder: [
+      // { name: "BgGIF" },
+      { name: "Skeleton3"},
+      { name: "Pants" },
+      { name: "Shoes" },
+      { name: "TShirt" },
+      { name: "HipAccesories" },
+      { name: "Craneo3" },
+      { name: "Brillo" },
+      { name: "Headtop" },      
+    ],
+  },
+  //Blanco Gris
+  {
+    growEditionSizeTo: 3,
+    layersOrder: [
+      // { name: "BgGIF" },
+      { name: "Skeleton4"},
+      { name: "Pants" },
+      { name: "Shoes" },
+      { name: "TShirt" },
+      { name: "HipAccesories" },
+      { name: "Craneo4" },
+      { name: "Brillo" },
+      { name: "Headtop" },      
+    ],
+  },
+  //Dorado
+  {
+    growEditionSizeTo: 1,
+    layersOrder: [
+      // { name: "BgGIF" },
+      { name: "Skeleton5"},
+      { name: "Pants" },
+      { name: "Shoes" },
+      { name: "TShirt" },
+      { name: "HipAccesories" },
+      { name: "Craneo5" },
+      { name: "Brillo" },
+      { name: "Headtop" },      
+    ],
+  },
 ];
 
 const shuffleLayerConfigurations = false;
@@ -135,7 +135,7 @@ const pixelFormat = {
 };
 
 const background = {
-  generate: true,
+  generate: false,
   brightness: "80%",
   static: false,
   default: "#000000",
@@ -145,7 +145,7 @@ const extraMetadata = {};
 
 const rarityDelimiter = "#";
 
-const uniqueDnaTorrance = 10000;
+const uniqueDnaTorrance = 50;
 
 const preview = {
   thumbPerRow: 5,
