@@ -459,7 +459,7 @@ const startCreating = async () => {
         }
       }
     }
-    layerConfigIndex++;
+    layerConfigIndex++; 
   }
   writeMetaData(JSON.stringify(metadataList, null, 2));
 };
